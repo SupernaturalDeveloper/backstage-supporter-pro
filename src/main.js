@@ -1,20 +1,30 @@
 import Vue from 'vue'
 import App from './App.vue'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+
 import router from './router'
 import store from './store'
-import ElementUI from 'element-ui'  //引入element-ui库
-import VForm from 'vform-builds'  //引入VForm库
-import 'element-ui/lib/theme-chalk/index.css'  //引入element-ui样式
-import 'vform-builds/dist/VFormDesigner.css'  //引入VForm样式
-Vue.config.productionTip = false
-Vue.use(ElementUI)  //全局注册element-ui
-Vue.use(VForm)  //全局注册VForm(同时注册了v-form-designer和v-form-render组件)
+import axios from 'axios'
+import './mock/mock.js'
 
-import request from '@/api'
-Vue.prototype.$R = request;
-require('./mock/mock')
+Vue.config.productionTip = false
+Vue.use(ElementUI)
+Vue.prototype.$axios = axios
+
+router.beforeEach((to, from, next) => {
+  if (to.path === '/login') return next()
+  const tokenStr = JSON.parse(window.sessionStorage.getItem('token'))
+  if (!tokenStr) { 
+    alert('请先登录账号再访问')
+    return next('/login')
+  }
+  next()
+})
+
 new Vue({
   router,
   store,
-  render: h => h(App)
+  axios,
+  render: h => h(App),
 }).$mount('#app')

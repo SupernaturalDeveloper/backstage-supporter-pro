@@ -6,10 +6,10 @@ let List = []
 for (let i = 0; i < 5; i++) {
     List.push(
         Mock.mock({
-            "id": i + 1001,
+            "id": i+1001,
             "image": Random.image('100x100', '#894FC4', '#FFF', 'png', '@id'),
             "name": 'admin',
-            "password": 'admin' + (i + 1001)
+            "password": 'admin' + (i+1001)
         })
     )
 }
@@ -26,7 +26,7 @@ export default {
         }
     },
     //登录
-    login (options) {
+    login(options) {
         let loginData = JSON.parse(options.body).params.loginData
         //检验账号是否存在
         let val = List.find(e => e.name === loginData.name && e.password === loginData.password)
@@ -80,7 +80,7 @@ export default {
             List = List.filter(a => a.id !== id)
             return {
                 code: 200,
-                message: '管理员' + id + '删除成功'
+                message: '管理员'+id+'删除成功'
             }
         }
     },
@@ -113,7 +113,7 @@ export default {
         let adminData = JSON.parse(options.body).params.adminData
         console.log(adminData)
         List = List.map(val => {
-            return val.id === adminData.id ? adminData : val;
+            return val.id === adminData.id ? adminData : val ;
         });
         return {
             code: 200,

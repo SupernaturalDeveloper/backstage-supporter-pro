@@ -1,22 +1,23 @@
 <template>
-    <div>
-        <router-view></router-view>
-    </div>
+  <div id="app">
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "App",
 
-        data() {
-            return {};
-        },
-
-        mounted() {},
-
-        methods: {},
-    };
+export default {
+  name: 'App'
+}
 </script>
 
-<style lang="scss" scoped>
+<style>
+  #app {
+    height: 100vh;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
 </style>
